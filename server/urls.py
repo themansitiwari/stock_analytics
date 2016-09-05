@@ -6,10 +6,10 @@ from server.api import getAllRawData, getMonthOnMothGrowth, getQuaterOnQuaterGro
 urlpatterns = patterns(
     '',
 
-    url('^index/$', IndexView.as_view(), name='index'),
+    url('^$', IndexView.as_view(), name='index'),
     url(r'^api/getRawData$', getAllRawData, name='rawData'),
-    url(r'^api/getMom$', getAllRawData, name='MonthOnMonth'),
-    url(r'^api/getQoq$', getAllRawData, name='QuaterOnQuater'),
-    url(r'^api/getYoy$', getAllRawData, name='YearOnYear'),
-    url(r'^api/getCumulativeTable$', getAllRawData, name='CumulativeTable'),
+    url(r'^api/getMom$', getMonthOnMothGrowth, name='MonthOnMonth'),
+    url(r'^api/getQoq$', getQuaterOnQuaterGrowth, name='QuaterOnQuater'),
+    url(r'^api/getYoy$', getYearOnYearGrowth, name='YearOnYear'),
+    url(r'^api/getCumulativeTable$', getCumulativeTableData, name='CumulativeTable'),
 )
