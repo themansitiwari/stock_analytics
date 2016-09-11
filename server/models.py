@@ -12,5 +12,5 @@ class Stock(models.Model):
     adj_close = models.FloatField()
     stock = models.CharField(max_length=10)
 
-    def __str__(self):  # __unicode__ on Python 2
+    def __str__(self):
         return self.stock
