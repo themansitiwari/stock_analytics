@@ -10,8 +10,10 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+from server import dateFilters
+
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -25,7 +27,6 @@ DEBUG = os.environ.get('DEBUG', True)
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -55,17 +56,9 @@ ROOT_URLCONF = 'server.urls'
 
 WSGI_APPLICATION = 'server.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
-import dj_database_url
-
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
-#     )
-# }
 
 DATABASES = {
     'default': {
@@ -73,7 +66,7 @@ DATABASES = {
         'NAME': 'stock_analytics',
         'USER': 'root',
         'PASSWORD': 'password',
-        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'HOST': 'localhost',  # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     }
 }
@@ -90,7 +83,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
@@ -125,3 +117,17 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
+
+
+DATE_FILTERS = {
+    "1W": dateFilters.get_date_range_for_weeks(1),
+    "2W": dateFilters.get_date_range_for_weeks(2),
+    "3W": dateFilters.get_date_range_for_weeks(3),
+    "1M": dateFilters.get_date_range_for_months(1),
+    "3M": dateFilters.get_date_range_for_months(3),
+    "6M": dateFilters.get_date_range_for_months(6),
+    "9M": dateFilters.get_date_range_for_months(9),
+    "1Y": dateFilters.get_date_range_for_years(1),
+    "3Y": dateFilters.get_date_range_for_years(3),
+    "5Y": dateFilters.get_date_range_for_years(5),
+}
