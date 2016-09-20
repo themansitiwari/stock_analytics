@@ -10,13 +10,16 @@
 
 <body>
   {% include 'navbar.html' %}
-
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-xs-12 ng-view"></div>
+  <div ng-controller="StockController">
+    <div class="container">
+      <div class="row">
+        <multiselect ng-model="filterObj.selectedStocks" options="c for c in stockOptions" data-multiple="true" class="col-md-4"></multiselect>
+        <multiselect ng-model="filterObj.selectedDateRange" options="c for c in dateRangeOptions" data-multiple="false" class="col-md-4"></multiselect>
+        <button type="button" class="btn btn-primary" ng-click="generateChart()">Generate Chart</button>
+        <div ng-if="chartOptions.load" id="first_chart" class="col-md-12" hc-chart options="chartOptions" chart-id="first_chart"></div>
+      </div>
     </div>
   </div>
-
   {% include 'javascripts.html' %}
 </body>
 </html>

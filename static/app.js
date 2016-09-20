@@ -5,7 +5,8 @@
  */
 var stockAnalytics = angular
     .module('stockAnalytics', [
-      'ngRoute'
+      'ngRoute',
+      'ui.multiselect'
     ]);
 
 stockAnalytics.config(function($interpolateProvider, $routeProvider, $locationProvider) {

@@ -13,9 +13,9 @@ from server.models import Stock
 def get_all_raw_data(request):
     date_range, stock = __get_date_range_and_stock_from_request(request)
     result = Stock.objects.filter(stock__in=stock)
-    if date_range is not None and date_range is not "MAX":
+    if date_range is not None and date_range != "MAX":
         result = result.filter(date__range=DATE_FILTERS[date_range])
-    return HttpResponse(json.dumps(list(result.values()), cls=DjangoJSONEncoder))
+    return HttpResponse(json.dumps(list(result.order_by("date").values()), cls=DjangoJSONEncoder))
 
 
 @csrf_exempt
@@ -91,6 +91,8 @@ def get_cumulative_table_data(request):
 
 
 def __get_date_range_and_stock_from_request(request):
-    date_range = request.body('dateRange')
-    stock = request.body('stock')
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
+    date_range = body['dateRange']
+    stock = body['stock']
     return date_range, stock
